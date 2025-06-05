@@ -1,0 +1,5 @@
+src/node-modules
+.vscode/
+config.json
+.env
+src/config.json

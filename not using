@@ -1,0 +1,38 @@
+
+//array tmsItemsToday contains JSON items
+//Prep slots coverts the items from RS format to JS format
+//isItem checks if the conversion was successful
+for (let i = 0; i < tmsItemsToday.length; i++) {
+    prepSlots(tmsItemsToday[i]);
+    isItem(tmsItemsToday[i]);
+}
+
+
+function prepSlots() {
+    // many item names are unsuitable for JS so the names have to converted to match the Item objects in tms-items-index [itemlistJS] this includes D&D tokens, Menaphite gifts & Goebie Charms
+    const itemNameRS = ['d&d', 'daily', 'weekly', 'monthly', 'Small goebie burial charm', 'Medium goebie burial charm', 'Large goebie burial charm', '(large)', '(medium)', '(small)', ' '];
+    const itemNameOBJ = ['dnd', 'D', 'W', 'M', 'goebie_burial_charm_s', 'goebie_burial_charm_m', 'goebie_burial_charm_l', 'l', 'm', 's', '_']
+
+
+    for (let i = 0; i < itemNameRS.length; i++) {
+        tmsItemsToday[i].replace(itemNameRS[i], itemNameOBJ[i]);
+        
+    }
+}
+
+function isItem(itemName) {
+    for (let i = 0; i < tmsItemsToday.length; i++) {
+        result = item_list.includes(itemName, 0);
+        if (result === false) {
+            throw new error(`your item ${itemName}, doesnt exist`);
+        }
+        console.log(`your item ${itemName}, exists`);
+        return true;
+    }
+}
+
+
+//array 2 has the items from wiki in RS form
+//array 3 has the items in JS form
+//the script should change the names and then run an index to swap the string to an object
+let obj = item_list.find(o => o.name === tmsItemsToday[i]);

@@ -1,0 +1,29 @@
+{
+  "name": "rs3gimbot",
+  "version": "1.0.0",
+  "description": "A runescape 3 Discord bot for dailies and Group Irons",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ald91/RS3GIMBOT.git"
+  },
+  "author": "Adam Davis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ald91/RS3GIMBOT/issues"
+  },
+  "homepage": "https://github.com/ald91/RS3GIMBOT#readme",
+  "dependencies": {
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0"
+  }
+}
