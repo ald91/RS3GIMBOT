@@ -1,48 +1,47 @@
-// Require the necessary discord.js classes
-import { Client, Collection, Events, GatewayIntentBits } from 'discord.js';
-import data from "./config.json" with {type: 'json'};
-import { readdirSync } from 'node:fs';
-import { readdir } from 'fs/promises';
-import { join } from 'node:path';
-import path from 'path';
-import { fileURLToPath } from "node:url";
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, Events, GatewayIntentBits, MessageFlags } = require('discord.js');
+const { token } = require('./config/config.json');
 
-const json = data;
-const Token = json.token;
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] }); // Create a new client instance
-client.commands = new Collection(); // generate comments using collection item
+client.commands = new Collection();
+ const foldersPath = path.join(__dirname, 'commands');
+const commandFolders = fs.readdirSync(foldersPath);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const utilityPath = path.join(__dirname, 'Commands', 'Utility');
-const commandFiles = await readdir(utilityPath);
-
-// const commandFiles = await readdir('./commands');
-
-
+for (const folder of commandFolders) {
+const commandsPath = path.join(foldersPath, folder);
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
-if (file.endsWith('.js')) {
-const filePath = path.join(utilityPath, file);
-const command = await import(`file://${filePath}`);
-
+const filePath = path.join(commandsPath, file);
+console.log(`🔍 Loading command: ${filePath}`);
+try {
+const command = require(filePath);
+console.log(`✅ Loaded: ${filePath}`);
 if ('data' in command && 'execute' in command) {
 client.commands.set(command.data.name, command);
-console.log(`The command at ${filePath} has been initialized`);
 } else {
-console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+console.warn(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+}
+} catch (err) {
+console.error(`❌ Error loading ${filePath}:`, err);
 }
 }
 }
 
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
-// Log in to Discord with your client's token
-console.log(Token);
-client.login(Token);
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
 
-// When the client is ready, run this code (only once).
-// The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
-// It makes some properties non-nullable.
-client.once(Events.ClientReady, readyClient => {
-	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-});
+
+
+client.login(token);

@@ -1,7 +1,7 @@
-export default {item_list, Item};
+module.exports = { item_listJS , Item};
 
 //item array containing objects
-const item_listJS = [ ensouled_bar, ensouled_cloth, ensouled_thread, greater_ensouled_bar, greater_ensouled_cloth, greater_ensouled_thread]
+const item_listJS = [ ensouled_bar, ensouled_cloth, ensouled_thread, greater_ensouled_bar, greater_ensouled_cloth, greater_ensouled_thread, ]
 
 //items constructor function
 function Item(name, cost, quantity, description, iconURL,) {
@@ -23,12 +23,12 @@ const x = new Item()
   const greater_ensouled_thread	= new Item(`Greater ensouled thread`, `300,000`, `1`, `A greater ensouled thread, used to upgrade necromancer's equipment.`, ``);
 
 //SLOT 2 necrotic runes
-  const impure_essence = new Item(`Impure essence`, `17,600`, `1000`, , `An uncharged rune stone imbued with necrotic energy. Used in Runecrafting for training and production.`,``);
-  const spirit_rune	= new Item(`Spirit rune`,	100	100	80-2,000	A necrotic rune used in incantations.`,``);
-  const bone_rune = new Item(`Bone rune`,	100	200	313	11,300	A necrotic rune used in incantations.`,``);
-  const flesh_rune = new Item(`Flesh rune`,	100	400	404	400	A necrotic rune used in incantations.`,``);
-  const miasma_rune = new Item(`Miasma rune`,	100	800	500-30,000	A necrotic rune used in incantations.`,``);
-
+  const impure_essence = new Item(`Impure essence`, `17,600`, `1000`, `An uncharged rune stone imbued with necrotic energy. Used in Runecrafting for training and production.`,``);
+  const spirit_rune	= new Item(`Spirit rune`,	`100`, `2,000`,	`A necrotic rune used in incantations.`,``);
+  const bone_rune = new Item(`Bone rune`,	`100`, ``,	`A necrotic rune used in incantations.`,``);
+  const flesh_rune = new Item(`Flesh rune`,	`100`, ``, `A necrotic rune used in incantations.`,``);
+  const miasma_rune = new Item(`Miasma rune`,	`100`, ``,	`A necrotic rune used in incantations.`,``);
+/*
 //Slot 3 ritual items
   Greater necroplasm	Greater necroplasm	50	100	390	14,500	A greater necroplasm, used in creation of ritual reagents.
   Powerful necroplasm	Powerful necroplasm	50	200	666	23,300	A powerful necroplasm, used in creation of ritual reagents.
@@ -44,3 +44,4 @@ const x = new Item()
   Uncut moonstone	Uncut moonstone	1	4,000	263,923	259,923	A gemstone used in crafting necromantic jewellery.
   Ghost impling jar	Ghost impling jar	1	1,000	74,039	73,039	A ghost impling in a jar. Can be opened for a reward.
   Extreme necromancy flask (6)	Extreme necromancy flask (6)	1	3,000	65,203	62,203	Six doses of a powerful necromancy-boosting potion.
+  /*
