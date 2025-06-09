@@ -1,4 +1,4 @@
-const {tmsPrepSlots, shopItem1, shopItem2, shopItem3, shopItem4 } = require('../../functions/tms/tms-items-index.js');
+/* const {tmsPrepSlots, shopItem1, shopItem2, shopItem3, shopItem4 } = require('../../functions/tms/tms-items-index.js');
 const {tmsGet} = require('../../functions/tms/tms-calc.js');
 const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
@@ -34,4 +34,4 @@ module.exports = {
 
 		await interaction.reply({ embeds: [tmsEmbed] });
 	},
-};
+}; */

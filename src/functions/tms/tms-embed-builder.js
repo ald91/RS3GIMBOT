@@ -18,10 +18,3 @@ const tmstodayEmbed = new EmbedBuilder()
 	.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
 channel.send({ embeds: [tmstodayEmbed] });
-		})
-
-		.catch (error => {
-	console.error('Error:', error);
-});
-
-};
