@@ -1,51 +1,47 @@
- /* const parse = require('node:path');
 const getX = require('../../services/getx.js');
-const item_listJS = require('./tms-items-index.js');
-const tmsPrepSlots = require ('./tms-prep-slots.js');
+const { item_listJS } = require('./tms-items-index.js');
 const ApiLinks = require('../../services/apilinks.js');
 
-getX(ApiLinks.getTms());
 
-tmsItemsToday = [];
-replacementsCompleted = 0;
-ShopItem1 = 'item 1';
-ShopItem2 = 'item 2';
-ShopItem3 = 'item 3';
-ShopItem4 = 'item 4';
 
 async function tmsGet() {
-	
+
+    const tmsItemsToday = [];
+
+    const tmsAPI = ApiLinks.getTms();
+    console.log(`address to check for TMS data is ${tmsAPI}`);
+
+    // app takes data from stringified API reading
+    const data = await getX(tmsAPI)
+    let tms_string = data.parse.text['*'].toLowerCase();
+    console.log(` data obtained from Runescape Wiki API = ${tms_string}`);
+
+    //search string to any item that appears in the string. if it does assign it to a shopitem variable and then remove it from the string
+    //for loop 1 is for assigning the shop items (not map, as slot 1 is added later using unshift)
+    //for nested for loop this searches through the tms_string for any matching items
+    // the matched item is then removed from the string using replace */
+
+    for (let i = 0; i < item_listJS.length && tmsItemsToday.length < 4; i++) {
+        const itemOBJ = item_listJS[i];
+        const itemName = itemOBJ.name.toLowerCase();
+
+        if (tms_string.includes(itemName)) {
+            tmsItemsToday.push(itemOBJ);
+            tms_string = tms_string.replace(itemName, "");
+        }
+    }
 
 
-		// app takes data from stringified API reading
-		const tms_string = parse.json(data.text['*']);
-		console.log(tms_string);
+    // map is always slot 1. Import item for Item_listJS array position [0]
+    tmsItemsToday.unshift(item_listJS[0]);
 
-		// search object for items and put in array tmsItemsToday
-		tmsItemsToday = tms_string.match(item_listJS);
+    // return stock as string
+    console.log(tmsItemsToday);
+    console.log(`slot1 = ${tmsItemsToday[0].name}, slot2 = ${tmsItemsToday[1].name}, slot3 = ${tmsItemsToday[2].name} & slot4 = ${tmsItemsToday[3].name} for today`);
 
-		// map is always slot 1
-		tmsItemsToday.unshift('Uncharted Island Map');
-
-		// build array for discord export
-		ShopItem1 = tmsItemsToday[0];
-		ShopItem2 = tmsItemsToday[1];
-		ShopItem3 = tmsItemsToday[2];
-		ShopItem4 = tmsItemsToday[3];
-
-		// return stock as string
-		console.log(`slot1 = ${ShopItem1}, slot2 = ${ShopItem2}, slot3 = ${ShopItem3} & slot4 = ${ShopItem4} for today`);
-
-		// prep items in [tmsItemsToday]
-		tmsPrepSlots();
-
-		// return the array of items
-		return tmsItemsToday, ShopItem1, ShopItem2, ShopItem3, ShopItem4;
-	};
-}
+    // return the array of items
+    return tmsItemsToday;
+};
 
 
-
-
-module.exports = { tmsGet, tmsPrepSlots, ShopItem1, ShopItem2, ShopItem3, ShopItem4, tmsItemsToday };
-*/
+module.exports = { tmsGet };
