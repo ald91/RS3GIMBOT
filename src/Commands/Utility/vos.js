@@ -19,26 +19,26 @@ module.exports = {
 			if (!data) throw new Error('no data returned from getX');
 
 			const clanIcons = [
-				{ clan: `Amlodd`, icon: `https://runescape.wiki/images/Amlodd_Clan.png?6c04f`, buff: `Summoning and divination buffs and xp`},
-				{ clan: `Cadarn`, icon: `https://runescape.wiki/images/Cadarn_Clan.png?f8c96`,buff: `magic  and ranged xp` },
-				{ clan: `Cryws`, icon: `https://runescape.wiki/images/Crwys_Clan.png?49be0`, buff: `farming and woodcutting xp buffs and xp` },
-				{ clan: `Hefin`, icon: `https://runescape.wiki/images/Hefin_Clan.png?e62c8`, buff: `agility and prayer xp` },
-				{ clan: `Iorwerth`, icon: `https://runescape.wiki/images/Iorwerth_Clan.png?6d35e`, buff: `slayer and melee xp` },
-				{ clan: `Ithell`, icon: `https://runescape.wiki/images/thumb/Ithell_Clan.png/50px-Ithell_Clan.png?95c05`, buff: `construction and crafting xp` },
-				{ clan: `Meilyr`, icon: `https://runescape.wiki/images/Meilyr_Clan.png?6a5e9`,buff: `dungeoneering buffs and herblore xp` },
-				{ clan: `Trahaearn`, icon: `https://runescape.wiki/images/Trahaearn_Clan.png?9b997`, buff: `mining and smithing buffs and xp` },
+				{ clan: `Amlodd`, icon: `https://runescape.wiki/images/Amlodd_Clan.png`, buff: `Summoning and divination buffs and xp`},
+				{ clan: `Cadarn`, icon: `https://runescape.wiki/images/Cadarn_Clan.png`,buff: `magic  and ranged xp` },
+				{ clan: `<:Crwys:1382762263727046717> Cryws`, icon: `https://runescape.wiki/images/Crwys_Clan.png`, buff: `farming and woodcutting xp buffs and xp` },
+				{ clan: `<:Hefin:1382762291430166588> Hefin`, icon: `https://runescape.wiki/images/Hefin_Clan.png`, buff: `agility and prayer xp` },
+				{ clan: `<:Iorwerth:1382762329271173190>  Iorwerth`, icon: `https://runescape.wiki/images/Iorwerth_Clan.png`, buff: `slayer and melee xp` },
+				{ clan: `Ithell`, icon: `https://runescape.wiki/images/thumb/Ithell_Clan.png`, buff: `construction and crafting xp` },
+				{ clan: `Meilyr`, icon: `https://runescape.wiki/images/Meilyr_Clan.png`,buff: `dungeoneering buffs and herblore xp` },
+				{ clan: `Trahaearn`, icon: `https://runescape.wiki/images/Trahaearn_Clan.png`, buff: `mining and smithing buffs and xp` },
 			]
 
 			district1 = {
 				clan: data['district1'],
 				icon: clanIcons.find(c => c.clan === data['district1'])?.icon || null,
-				buffs: clanIcons.find(c => c.buff === data['district1'])?.icon || null
+				buff: clanIcons.find(c => c.buff === data['district1'])?.buff || null
 			};
 
 			district2 = {
 				clan: data['district2'],
 				icon: clanIcons.find(c => c.clan === data['district2'])?.icon || null,
-				buffs: clanIcons.find(c => c.buff === data['district1'])?.icon || null
+				buff: clanIcons.find(c => c.buff === data['district1'])?.buff || null
 				
 			};
 		}
@@ -55,10 +55,12 @@ module.exports = {
 
 		const embed1 = new EmbedBuilder()
 			.setTitle(`District 1: ${district1.clan}`)
+			.setDescription(`Clan Buff = ${district1.buff}`)
 			.setImage(district1.icon);
 
 		const embed2 = new EmbedBuilder()
 			.setTitle(`District 2: ${district2.clan}`)
+			.setDescription(`Clan Buff = ${district2.buff}`)
 			.setImage(district2.icon);
 
 

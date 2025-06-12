@@ -1,5 +1,3 @@
-const { data } = require("../commands/Utility/vos");
-
 async function getX(url) {
 
 
@@ -19,4 +17,4 @@ async function getX(url) {
     }
 }
 
-module.exports = (getX);
+module.exports = getX;
